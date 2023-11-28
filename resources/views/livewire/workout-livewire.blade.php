@@ -119,11 +119,10 @@
                                                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                                             dir="rtl">
                                                             <option value="">اختر الفئة </option>
-                                                            <option value="ناشئين">تحت 12</option>
-                                                            <option value="براعم">تحت 14</option>
-                                                            <option value="امال">تحت 16</option>
-                                                            <option value="اواسط">تحت 18</option>
-
+                                                            <option value="ناشئين">ناشئين</option>
+                                                            <option value="براعم">براعم</option>
+                                                            <option value="امال">امال</option>
+                                                            <option value="اواسط">اواسط</option>
 
                                                         </select>
                                                         @error('team')
@@ -274,10 +273,10 @@
                                                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                                             dir="rtl">
                                                             <option value="">اختر الفئة </option>
-                                                            <option value="ناشئين">تحت 12</option>
-                                                            <option value="براعم">تحت 14</option>
-                                                            <option value="امال">تحت 16</option>
-                                                            <option value="اواسط">تحت 18</option>
+                                                            <option value="ناشئين">ناشئين</option>
+                                                            <option value="براعم">براعم</option>
+                                                            <option value="امال">امال</option>
+                                                            <option value="اواسط">اواسط</option>
 
 
 

@@ -1,4 +1,4 @@
-@can('fullreportplayers')
+@can('seereportplayers')
     <div class="container mx-auto py-16 px-8 gap-4" x-data="{ showReportModal: false, showModal: false, showEditModal: false, name: '', weight: '', pre_completion: '', completion: '', int_date: '', task_month: '' }">
         <div class="container" x-data="{ showMessage: {{ session()->has('message') ? 'true' : 'false' }} }">
             @if (session()->has('message'))
@@ -22,33 +22,35 @@
             </div>
         @endif
 
+        @can('fullreportplayers')
 
-        <div class="ml-2 ">
+            <div class="ml-2 ">
 
-            {{-- <input type="text" wire:model.lazy="search" placeholder="Search for task" class="ml-2 border border-opacity-50 border-width-2 rounded-md p-2 "> --}}
+                {{-- <input type="text" wire:model.lazy="search" placeholder="Search for task" class="ml-2 border border-opacity-50 border-width-2 rounded-md p-2 "> --}}
 
 
 
-            <button
-                class="bg-black text-white ml-2 px-4 py-2 text-sm rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-opacity-50"
-                x-on:click="showModal = true" x-transition:enter="transition ease-out duration-300 transform"
-                x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
-                x-transition:leave="transition ease-in duration-300 transform"
-                x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
-                wire:click="lodemodel">
-                اضافة تقرير
-            </button>
-
-            @can('fullreportcouch')
                 <button
                     class="bg-black text-white ml-2 px-4 py-2 text-sm rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-opacity-50"
-                    x-on:click="showReportModal = true" x-transition:enter="transition ease-out duration-300 transform"
+                    x-on:click="showModal = true" x-transition:enter="transition ease-out duration-300 transform"
                     x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
                     x-transition:leave="transition ease-in duration-300 transform"
                     x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
-                    wire:click="lodereportmodel">
-                    انشاء تقرير
+                    wire:click="lodemodel">
+                    اضافة تقرير
                 </button>
+
+                @can('fullreportcouch')
+                    <button
+                        class="bg-black text-white ml-2 px-4 py-2 text-sm rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-opacity-50"
+                        x-on:click="showReportModal = true" x-transition:enter="transition ease-out duration-300 transform"
+                        x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+                        x-transition:leave="transition ease-in duration-300 transform"
+                        x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
+                        wire:click="lodereportmodel">
+                        انشاء تقرير
+                    </button>
+                @endcan
             @endcan
 
             @if ($loaded)
@@ -132,10 +134,10 @@
                                                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                                             dir="rtl">
                                                             <option value="">اختر الفئة </option>
-                                                            <option value="ناشئين">تحت 12</option>
-                                                            <option value="براعم">تحت 14</option>
-                                                            <option value="امال">تحت 16</option>
-                                                            <option value="اواسط">تحت 18</option>
+                                                            <option value="ناشئين">ناشئين</option>
+                                                            <option value="براعم">براعم</option>
+                                                            <option value="امال">امال</option>
+                                                            <option value="اواسط">اواسط</option>
 
 
 
@@ -414,36 +416,36 @@
                                             <td class="px-5 py-4 text-sm whitespace-nowrap">
                                                 {{ $report['performanceGrade'] }}
                                             </td>
-
-                                            <td class="px-5 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                                <div class="gap-3">
-                                                    <span>
-                                                        <button
-                                                            class="inline-flex items-center px-2.5 py-1.5 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-                                                            x-on:click="showEditModal = true"
-                                                            x-transition:enter="transition ease-out duration-300 transform"
-                                                            x-transition:enter-start="opacity-0 scale-90"
-                                                            x-transition:enter-end="opacity-100 scale-100"
-                                                            x-transition:leave="transition ease-in duration-300 transform"
-                                                            x-transition:leave-start="opacity-100 scale-100"
-                                                            x-transition:leave-end="opacity-0 scale-90"
-                                                            wire:click="lodeEditmodel({{ $report['id'] }})">
-                                                            تعديل
-                                                        </button>
-                                                    </span>
-                                                    <span><button
-                                                            onclick="confirm('هل تريد حذف التقرير??')  || event.stopImmediatePropagation()"
-                                                            wire:click="deletereport({{ $report['id'] }})"
-                                                            class="inline-flex items-center px-2.5 py-1.5 border border-red-500 rounded-md font-semibold text-xs text-red-500 bg-white hover:bg-red-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                                                            حذف
-                                                        </button>
-                                                    </span>
-
-
+                                            @can('fullreportplayers')
+                                                <td class="px-5 py-4 text-sm font-medium text-right whitespace-nowrap">
+                                                    <div class="gap-3">
+                                                        <span>
+                                                            <button
+                                                                class="inline-flex items-center px-2.5 py-1.5 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                                                x-on:click="showEditModal = true"
+                                                                x-transition:enter="transition ease-out duration-300 transform"
+                                                                x-transition:enter-start="opacity-0 scale-90"
+                                                                x-transition:enter-end="opacity-100 scale-100"
+                                                                x-transition:leave="transition ease-in duration-300 transform"
+                                                                x-transition:leave-start="opacity-100 scale-100"
+                                                                x-transition:leave-end="opacity-0 scale-90"
+                                                                wire:click="lodeEditmodel({{ $report['id'] }})">
+                                                                تعديل
+                                                            </button>
+                                                        </span>
+                                                        <span><button
+                                                                onclick="confirm('هل تريد حذف التقرير??')  || event.stopImmediatePropagation()"
+                                                                wire:click="deletereport({{ $report['id'] }})"
+                                                                class="inline-flex items-center px-2.5 py-1.5 border border-red-500 rounded-md font-semibold text-xs text-red-500 bg-white hover:bg-red-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                                                حذف
+                                                            </button>
+                                                        </span>
 
 
-                                                </div>
-                                            </td>
+                                                    </div>
+                                                </td>
+                                            @endcan
+
                                         </tr>
                                     @endforeach
 
@@ -549,10 +551,10 @@
                                                                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                                                                     dir="rtl">
                                                                                     <option value="">اختر الفئة </option>
-                                                                                    <option value="ناشئين">تحت 12</option>
-                                                                                    <option value="براعم">تحت 14</option>
-                                                                                    <option value="امال">تحت 16</option>
-                                                                                    <option value="اواسط">تحت 18</option>
+                                                                                    <option value="ناشئين">ناشئين</option>
+                                                                                    <option value="براعم">براعم</option>
+                                                                                    <option value="امال">امال</option>
+                                                                                    <option value="اواسط">اواسط</option>
 
 
 

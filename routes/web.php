@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/workoutplan/{team}/{month}/{week}', [workoutPlanReport::class, 'report'])->name('workoutplan');
     });
 
-    Route::middleware(['can:fullAccessplayers'])->group(function () {
+    Route::middleware(['can:seeAccessplayers'])->group(function () {
         Route::get('/player', Playerlivewire::class)->name('player');
     });
     Route::middleware(['can:createPlan'])->group(function () {
@@ -50,7 +50,7 @@ Route::middleware('auth')->group(function () {
 
 
 
-    Route::middleware(['can:fullreportplayers'])->group(function () {
+    Route::middleware(['can:seereportplayers'])->group(function () {
         Route::get('/playerPreformance', PlayerPreformances::class)->name('playerPreformance');
 
     });

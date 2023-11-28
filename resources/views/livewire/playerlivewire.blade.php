@@ -1,4 +1,4 @@
-@can('fullAccessplayers')
+@can('seeAccessplayers')
 
     <div class="container mx-auto py-16 px-8 gap-4" x-data="{ showModal: false, showEditModal: false, name: '', email: '', director_id: '', head_id: '', degree: '', role: '', int_date: '', end_date: '', password: '' }">
         <div class="container" x-data="{ showMessage: {{ session()->has('message') ? 'true' : 'false' }} }">
@@ -30,18 +30,18 @@
             {{-- <input type="text" wire:model.lazy="search" placeholder="Search for user" class="ml-2 border border-opacity-50 border-width-2 rounded-md p-2 "> --}}
 
 
-
-            <button
-                class="bg-black text-white ml-2 px-4 py-2 text-sm rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-opacity-50"
-                x-on:click="name = '';email = '';end_date = '';password = ''; int_date = '';showModal = true"
-                x-transition:enter="transition ease-out duration-300 transform"
-                x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
-                x-transition:leave="transition ease-in duration-300 transform"
-                x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
-                wire:click="lodemodel">
-                اضافة مستخدم
-            </button>
-
+            @can('fullAccessplayers')
+                <button
+                    class="bg-black text-white ml-2 px-4 py-2 text-sm rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-opacity-50"
+                    x-on:click="name = '';email = '';end_date = '';password = ''; int_date = '';showModal = true"
+                    x-transition:enter="transition ease-out duration-300 transform"
+                    x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+                    x-transition:leave="transition ease-in duration-300 transform"
+                    x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
+                    wire:click="lodemodel">
+                    اضافة مستخدم
+                </button>
+            @endcan
 
 
 
@@ -347,32 +347,33 @@
                                             <td class="px-5 py-4 text-sm whitespace-nowrap">{{ $guy->position }}
                                             </td>
                                             <td class="px-5 py-4 text-sm whitespace-nowrap">{{ $guy->birthDate }}</td>
+                                            @can('fullAccessplayers')
+                                                <td class="px-5 py-4 text-sm font-medium text-right whitespace-nowrap">
+                                                    <div class="gap-3">
+                                                        <span>
+                                                            <button
+                                                                class="inline-flex items-center px-2.5 py-1.5 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                                                x-on:click="showEditModal = true"
+                                                                x-transition:enter="transition ease-out duration-300 transform"
+                                                                x-transition:enter-start="opacity-0 scale-90"
+                                                                x-transition:enter-end="opacity-100 scale-100"
+                                                                x-transition:leave="transition ease-in duration-300 transform"
+                                                                x-transition:leave-start="opacity-100 scale-100"
+                                                                x-transition:leave-end="opacity-0 scale-90"
+                                                                wire:click="lodeEditmodel({{ $guy->id }})">
 
-                                            <td class="px-5 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                                <div class="gap-3">
-                                                    <span>
+                                                                تعديل
+                                                            </button>
+                                                        </span>
                                                         <button
-                                                            class="inline-flex items-center px-2.5 py-1.5 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-                                                            x-on:click="showEditModal = true"
-                                                            x-transition:enter="transition ease-out duration-300 transform"
-                                                            x-transition:enter-start="opacity-0 scale-90"
-                                                            x-transition:enter-end="opacity-100 scale-100"
-                                                            x-transition:leave="transition ease-in duration-300 transform"
-                                                            x-transition:leave-start="opacity-100 scale-100"
-                                                            x-transition:leave-end="opacity-0 scale-90"
-                                                            wire:click="lodeEditmodel({{ $guy->id }})">
-
-                                                            تعديل
+                                                            onclick="confirm('هل تريد حذف المستخدم?') || event.stopImmediatePropagation()"
+                                                            wire:click="delete({{ $guy->id }})"
+                                                            class="inline-flex items-center px-2.5 py-1.5 border border-red-500 rounded-md font-semibold text-xs text-red-500 bg-white hover:bg-red-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                                            حذف
                                                         </button>
-                                                    </span>
-                                                    <button
-                                                        onclick="confirm('هل تريد حذف المستخدم?') || event.stopImmediatePropagation()"
-                                                        wire:click="delete({{ $guy->id }})"
-                                                        class="inline-flex items-center px-2.5 py-1.5 border border-red-500 rounded-md font-semibold text-xs text-red-500 bg-white hover:bg-red-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                                                        حذف
-                                                    </button>
-                                                </div>
-                                            </td>
+                                                    </div>
+                                                </td>
+                                            @endcan
 
 
                                         </tr>
