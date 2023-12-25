@@ -55,27 +55,17 @@
                                 <table class="min-w-full divide-y divide-gray-200 text-right rounded-b-md table-fixed">
                                     <thead class="bg-gradient-to-b from-gray-50 to-gray-transparent">
                                         <tr>
-                                            <th
-                                                class="px-1 py-2 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
-                                                #
-                                            </th>
+
 
                                             <th
                                                 class="px-1 py-2 text-xs font-medium tracking-wider text-center  text-gray-500 uppercase">
-                                                التقارير شهر
+                                                الفئة
                                             </th>
                                             <th
                                                 class="px-1 py-2 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
-                                                النوع
+                                                مبلغ الصرف التقديري
                                             </th>
-                                            <th
-                                                class="px-1 py-2 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
-                                                للفئة
-                                            </th>
-                                            <th
-                                                class="px-1 py-2 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
-                                                note
-                                            </th>
+
 
                                         </tr>
                                     </thead>
@@ -85,37 +75,46 @@
                                         @endphp
 
                                         {{-- @dd($reports) --}}
+                                        <tr>
+                                            <td class="px-2 py-2 text-xs text-gray-900   text-center h-auto">
+                                                ناشئين
+                                            </td>
+                                            <td class="px-2 py-2 text-xs text-gray-900 whitespace-nowrap text-center">
+                                                {{ $gamecost }}
+                                            </td>
 
-                                        @foreach ($logustics as $logustic)
-                                            <tr>
-                                                <td
-                                                    class="px-2 py-2 text-sm font-medium text-gray-900 whitespace-nowrap text-center">
-                                                    {{ $i + 1 }}
-                                                </td>
+                                        </tr>
 
-                                                <td
-                                                    class="px-2 py-2 text-xs text-gray-900 whitespace-nowrap text-center">
-                                                    {{ $logustic->order_month }}
-                                                </td>
-                                                <td
-                                                    class="px-2 py-2 text-xs text-gray-900 whitespace-nowrap text-center">
-                                                    {{ $logustic->type }}
-                                                </td>
-                                                <td
-                                                    class="px-2 py-2 text-sm text-gray-900 whitespace-nowrap text-center">
-                                                    {{ $logustic->team }}
-                                                </td>
-                                                <td
-                                                    class="px-2 py-2 text-sm text-gray-900 whitespace-nowrap text-center">
-                                                    {{ $logustic->note }}
-                                                </td>
+                                        <tr>
+                                            <td class="px-2 py-2 text-xs text-gray-900  text-center h-auto">
+                                                براعم
+                                            </td>
+                                            <td class="px-2 py-2 text-xs text-gray-900 whitespace-nowrap text-center">
+                                                {{ $secondgamecost }}
+                                            </td>
 
-                                            </tr>
+                                        </tr>
+                                        <tr>
 
-                                            @php
-                                                $i++;
-                                            @endphp
-                                        @endforeach
+                                            <td class="px-2 py-2 text-xs text-gray-900  text-center h-auto">
+                                                امال
+                                            </td>
+                                            <td class="px-2 py-2 text-xs text-gray-900 whitespace-nowrap text-center">
+                                                {{ $thirdgamecost }}
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td class="px-2 py-2 text-xs text-gray-900   text-center h-auto">
+                                                اواسط
+                                            </td>
+                                            <td class="px-2 py-2 text-xs text-gray-900 whitespace-nowrap text-center">
+                                                {{ $forthgamecost }}
+                                            </td>
+
+                                        </tr>
+
 
                                     </tbody>
                                 </table>

@@ -137,12 +137,11 @@
                                                         dir="rtl">
                                                         <option value="">اختر الفئة </option>
 
-                                                        <option value="U12">تحت 12</option>
-                                                        <option value="U14">تحت 14</option>
-                                                        <option value="U16">تحت 16</option>
-                                                        <option value="U18">تحت 18</option>
-                                                        <option value="U20">تحت 20</option>
-                                                        <option value="senior">أكابر</option>
+                                                        <option value="ناشئين">ناشئين</option>
+                                                        <option value="براعم">براعم</option>
+                                                        <option value="امال">امال</option>
+                                                        <option value="اواسط">اواسط</option>
+
 
 
                                                     </select>
@@ -370,12 +369,11 @@
                                                                                 dir="rtl">
                                                                                 <option value="">اختر الفئة </option>
 
-                                                                                <option value="U12">تحت 12</option>
-                                                                                <option value="U14">تحت 14</option>
-                                                                                <option value="U16">تحت 16</option>
-                                                                                <option value="U18">تحت 18</option>
-                                                                                <option value="U20">تحت 20</option>
-                                                                                <option value="أكابر">أكابر</option>
+                                                                                <option value="ناشئين">ناشئين</option>
+                                                                                <option value="براعم">براعم</option>
+                                                                                <option value="امال">امال</option>
+                                                                                <option value="اواسط">اواسط</option>
+
 
 
                                                                             </select>

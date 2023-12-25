@@ -7,13 +7,13 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class logisticReport extends Controller
+class logisticReportPaper extends Controller
 {
     public $current_month;
     public $current_year;
     public $order_month;
 
-    public function report($id, $month)
+    public function report($month)
     {
         $this->order_month = $month;
 
@@ -34,10 +34,11 @@ class logisticReport extends Controller
 
         // dd($director);
 
-        return view('logisticReport', [
+        return view('logisticReport', [ 
 
             'logustics' => $logustic,
-
+            'current_year' => $this->current_year,
+            'current_month' => $this->current_month,
 
         ]);
 

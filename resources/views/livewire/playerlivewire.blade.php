@@ -39,7 +39,7 @@
                     x-transition:leave="transition ease-in duration-300 transform"
                     x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
                     wire:click="lodemodel">
-                    اضافة مستخدم
+                    اضافة لاعب
                 </button>
             @endcan
 
@@ -242,10 +242,10 @@
                                                             dir="rtl">
                                                             <option value="">اختر الفئة </option>
 
-                                                            <option value="ناشئين">تحت 12</option>
-                                                            <option value="براعم">تحت 14</option>
-                                                            <option value="امال">تحت 16</option>
-                                                            <option value="اواسط">تحت 18</option>
+                                                            <option value="ناشئين">ناشئين</option>
+                                                            <option value="براعم">براعم</option>
+                                                            <option value="امال">امال</option>
+                                                            <option value="اواسط">اواسط</option>
 
 
 
@@ -627,10 +627,11 @@
                                                                                     dir="rtl">
                                                                                     <option value="">اختر الفئة </option>
 
-                                                                                    <option value="ناشئين">تحت 12</option>
-                                                                                    <option value="براعم">تحت 14</option>
-                                                                                    <option value="امال">تحت 16</option>
-                                                                                    <option value="اواسط">تحت 18</option>
+                                                                                    <option value="ناشئين">ناشئين</option>
+                                                                                    <option value="براعم">براعم</option>
+                                                                                    <option value="امال">امال</option>
+                                                                                    <option value="اواسط">اواسط</option>
+
 
 
                                                                                 </select>

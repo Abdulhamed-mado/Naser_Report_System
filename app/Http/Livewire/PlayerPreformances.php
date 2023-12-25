@@ -20,6 +20,7 @@ class PlayerPreformances extends Component
     public string $player_id = '';
     public string $attendance = '';
     public string $preformances = '';
+    public  $report = '';
 
     public string $team = '';
 
@@ -75,16 +76,18 @@ class PlayerPreformances extends Component
                     $attendanceGrade = 'ممتاز';
                 }
 
-                if ($report->performance >= 0 && $report->performance >= 1) {
+                if ($report->preformances >= 0 && $report->preformances >= 1) {
                     $performanceGrade = 'ضعيف';
-                } elseif ($report->performance > 1 && $report->performance >= 2) {
+                } elseif ($report->preformances > 1 && $report->preformances >= 2) {
                     $performanceGrade = 'متوسط';
-                } elseif ($report->performance > 2 && $report->performance >= 3) {
+                } elseif ($report->preformances > 2 && $report->preformances >= 3) {
                     $performanceGrade = 'ممتاز';
                 }
 
+
                 $player = Player::find($report->player_id);
                 $couche = User::find($report->user_id);
+
 
                 $playerData[] = [
                     'id' => $report->id,
@@ -92,12 +95,11 @@ class PlayerPreformances extends Component
                     'player_name' => $player->name,
                     'couch_id' => $couche->user_id,
                     'couch_name' => $couche->name,
-                    'performance' => $performanceGrade,
+                    'performanceGrade' => $performanceGrade,
                     'attendance' => $attendanceGrade,
                     'team' => $report->team,
                 ];
             }
-
 
         } else {
             $reports = playerPreformance::all();
@@ -174,7 +176,7 @@ class PlayerPreformances extends Component
     {
         try {
 
-            $this->tasks = playerPreformance::orderBy('created_at', 'DESC')->get();
+            $this->report = playerPreformance::orderBy('created_at', 'DESC')->get();
         } catch (\Throwable $th) {
             session()->flash('error', 'الرجاء التأكد من البيانات');
         }
@@ -361,7 +363,7 @@ class PlayerPreformances extends Component
             return;
         } else {
             try {
-                $this->User = Auth::user();
+                // $User = Auth::user();
 
                 $report->delete();
 

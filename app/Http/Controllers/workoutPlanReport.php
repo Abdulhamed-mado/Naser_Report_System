@@ -41,11 +41,14 @@ class workoutPlanReport extends Controller
 
         $couch = User::where('repForTeam', $team)
             ->where('role', 'مدرب')->first();
-
+        if ($couch === null) {
+            $couch = User::where('role', 'superadmin')->first();
+            
+        }
         // dd($director);
         // dd($couch);
 
-        // dd($plan);
+        // dd($plan); 
         return view('workoutPlanReport', [
 
 

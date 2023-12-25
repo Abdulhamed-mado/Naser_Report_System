@@ -44,7 +44,6 @@
                                 <span class="font-bold">السيد / {{ $head->name }} </span><br>
                                 <span>مدير {{ $faculty->name }}</span>
                             </div> --}}
-
                             <div class="mb-4">
                                 <div class="bg-gradient-to-b from-green-50 via-teal-50 to-teal-transparent    p-2 ">
                                     <span class="font-bold">اسم المدرب </span> : {{ $couch->name }}<br>

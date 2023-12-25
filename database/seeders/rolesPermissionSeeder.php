@@ -18,7 +18,6 @@ class rolesPermissionSeeder extends Seeder
         $thirdpermission = Permission::create(['name' => 'taskReport']);
         $fifthpermission = Permission::create(['name' => 'fullAccessplayers']);
         $sixthpermission = Permission::create(['name' => 'fullreportplayers']);
-        // $seventhpermission = Permission::create(['name' => 'fullreportcouch']);
         $seventhpermission = Permission::create(['name' => 'createPlan']);
         $eigthpermission = Permission::create(['name' => 'fullAccessplan']);
         $ninthpermission = Permission::create(['name' => 'seereportplayers']);
@@ -30,7 +29,6 @@ class rolesPermissionSeeder extends Seeder
         $Firstrole->givePermissionTo('taskReport');
         $Firstrole->givePermissionTo('fullreportplayers');
         $Firstrole->givePermissionTo('fullAccessplayers');
-        $Firstrole->givePermissionTo('fullreportcouch');
         $Firstrole->givePermissionTo('fullAccessplan');
         $Firstrole->givePermissionTo('createPlan');
         $Firstrole->givePermissionTo('seereportplayers');
@@ -46,9 +44,9 @@ class rolesPermissionSeeder extends Seeder
         $Thirdrole = Role::create(['name' => 'اداري']);
         $Thirdrole->givePermissionTo('taskReport');
         $Thirdrole->givePermissionTo('fullAccessplayers');
-        // $Thirdrole->givePermissionTo('fullreportcouch');
         $Thirdrole->givePermissionTo('fullreportplayers');
-
+    $Thirdrole->givePermissionTo('seereportplayers');
+        $Thirdrole->givePermissionTo('seeAccessplayers');
 
     }
 }

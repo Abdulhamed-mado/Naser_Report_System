@@ -24,7 +24,7 @@
                         </x-nav-link>
                     @endcan
 
-                    @can('fullAccessplayers')
+                    @can('seeAccessplayers')
                         <x-nav-link :href="route('player')" :active="request()->routeIs('player')">
                             <img class="w-6 h-6 ml-2" src="{{ asset('images/Fplayer.svg') }}" alt="مستخدمين">
 
@@ -32,7 +32,7 @@
                         </x-nav-link>
                     @endcan
 
-                    @can('fullreportplayers')
+                    @can('seereportplayers')
                         <x-nav-link :href="route('playerPreformance')" :active="request()->routeIs('playerPreformance')">
                             <img class="w-6 h-6 ml-2" src="{{ asset('images/reports-icon.svg') }}" alt="مستخدمين">
 
@@ -47,6 +47,22 @@
                             {{ __(' تخطيط الجلسات التدريبية') }}
                         </x-nav-link>
                     @endcan
+
+
+                    @can('fullAccessUser')
+                        <x-nav-link :href="route('logistic')" :active="request()->routeIs('logistic')">
+                            <img class="w-6 h-6 ml-2" src="{{ asset('images/openBook.svg') }}" alt="ادارة اللوجستيات">
+                            {{ __('مخطط مصروفات المباريات') }}
+                        </x-nav-link>
+                    @endcan
+
+                    @can('fullAccessUser')
+                        <x-nav-link :href="route('MatchLogistic')" :active="request()->routeIs('MatchLogistic')">
+                            <img class="w-6 h-6 ml-2" src="{{ asset('images/openBook.svg') }}" alt="ادارة اللوجستيات">
+                            {{ __('مخطط المصروفات الشهرية') }}
+                        </x-nav-link>
+                    @endcan
+
 
                     {{-- 
     @can('fullreportcouch')
@@ -122,12 +138,12 @@
 
             @can('fullAccessUser')
                 <x-nav-link :href="route('mangement')" :active="request()->routeIs('mangement')">
-                    <img class="w-6 h-6 ml-2" src="{{ asset('images/Fplayer.svg') }}" alt="مستخدمين">
+                    <img class="w-6 h-6 ml-2" src="{{ asset('images/coach.svg') }}" alt="مستخدمين">
                     {{ __(' المستخدمين') }}
                 </x-nav-link>
             @endcan
 
-            @can('fullAccessplayers')
+            @can('seeAccessplayers')
                 <x-nav-link :href="route('player')" :active="request()->routeIs('player')">
                     <img class="w-6 h-6 ml-2" src="{{ asset('images/Fplayer.svg') }}" alt="مستخدمين">
 
@@ -135,9 +151,9 @@
                 </x-nav-link>
             @endcan
 
-            @can('fullreportplayers')
+            @can('seereportplayers')
                 <x-nav-link :href="route('playerPreformance')" :active="request()->routeIs('playerPreformance')">
-                    <img class="w-6 h-6 ml-2" src="{{ asset('images/Fplayer.svg') }}" alt="مستخدمين">
+                    <img class="w-6 h-6 ml-2" src="{{ asset('images/reports-icon.svg') }}" alt="مستخدمين">
 
                     {{ __(' تقارير الاعبين') }}
                 </x-nav-link>
@@ -145,11 +161,27 @@
 
             @can('createPlan')
                 <x-nav-link :href="route('plan')" :active="request()->routeIs('plan')">
-                    <img class="w-6 h-6 ml-2" src="{{ asset('images/Fplayer.svg') }}" alt="مستخدمين">
+                    <img class="w-6 h-6 ml-2" src="{{ asset('images/plan-icon.svg') }}" alt="مستخدمين">
 
                     {{ __(' تخطيط الجلسات التدريبية') }}
                 </x-nav-link>
             @endcan
+
+
+            @can('fullAccessUser')
+                <x-nav-link :href="route('logistic')" :active="request()->routeIs('logistic')">
+                    <img class="w-6 h-6 ml-2" src="{{ asset('images/openBook.svg') }}" alt="ادارة اللوجستيات">
+                    {{ __('مخطط مصروفات المباريات') }}
+                </x-nav-link>
+            @endcan
+            {{-- 
+   @can('fullAccessUser')
+                <x-nav-link :href="route('logistic')" :active="request()->routeIs('logistic')">
+                    <img class="w-6 h-6 ml-2" src="{{ asset('images/openBook.svg') }}" alt="ادارة اللوجستيات">
+                    {{ __('مخطط المصروفات الشهرية') }}
+                </x-nav-link>
+            @endcan --}}
+
         </div>
 
         <!-- Responsive Settings Options -->

@@ -3,20 +3,19 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use App\Models\game;
 use App\Models\logustic;
-use Illuminate\Support\Facades\Auth;
 
-class LogisticReport extends Component
+use Illuminate\Support\Facades\Auth;
+class MatchLogistic extends Component
 {
-    public string $name = '';
-    public string $type = '';
 
     public string $team = '';
     public string $matchType = '';
-    public string $plan = '';
-    public string $cost = '';
+    public string $quantity = '';
+    public string $cost = ''; 
     public  $User ;
-    public  $logustic ;
+    public  $game ;
     public string $order_date = '';
 
     public string $order_month = '';
@@ -33,13 +32,13 @@ class LogisticReport extends Component
 
 
     protected $rules = [
-        'name' => ['required'],
-        'type' => ['required'],
+     
+        'quantity' => ['required'],
         'cost' => ['required'],
         'order_date' => ['required'],
         'order_month' => ['required'],
-        'note' => ['required'],
         'matchType' => ['required'],
+        'note' => ['required'],
 
 
 
@@ -53,14 +52,14 @@ class LogisticReport extends Component
 
 
 
-        $logustics = logustic::all();
-// dd($logustics);
+        $games = game::all();
+// dd($games);
 
 
 
 
-        return view('livewire.logistic-report', [
-            'logustics' => $logustics,
+        return view('livewire.match-logistic', [
+            'games' => $games,
         ]);
     }
 
@@ -74,7 +73,7 @@ class LogisticReport extends Component
     {
         try {
 
-            $this->logustic = logustic::orderBy('created_at', 'DESC')->get();
+            $this->game = game::orderBy('created_at', 'DESC')->get();
         } catch (\Throwable $th) {
             session()->flash('error', 'الرجاء التأكد من البيانات');
         }
@@ -92,8 +91,8 @@ class LogisticReport extends Component
 
     public function lodeEditmodel($id)
     {
-        $report = logustic::where('id', $id)->first();
-        $this->type = $report->type;
+        $report = game::where('id', $id)->first();
+        $this->quantity = $report->quantity;
         $this->order_date = $report->order_date;
         $this->order_month = $report->order_month;
         $this->note = $report->note;
@@ -120,7 +119,7 @@ class LogisticReport extends Component
 
     public function propertyReset()
     {
-        $this->reset('note', 'order_month', 'order_date', 'team', 'type', 'name');
+        $this->reset('note', 'order_month', 'order_date', 'team', 'matchType','quantity' );
 
     }
 
@@ -139,24 +138,28 @@ class LogisticReport extends Component
         // $date = Carbon::createFromFormat('mm/dd/yyyy', $this->report_date)->format('Y-m-d');
         // dd($date);
 
-        try {
+        // try {
 
+        $cost = logustic::where('matchType',  $this->matchType)
+        ->where('team',$this->team)
+        ->get();
 
+        $totalCost = $cost->sum('cost');
 
             // dd($this->task_month);
-            $logustic = new logustic();
+            $game = new game();
+            $game->cost = $totalCost;
+            $game->quantity = $this->quantity;
+            $game->matchType = $this->matchType;
+            $game->order_date = $this->order_date;
+            $game->order_month = $this->order_month;
+            $game->note = $this->note;
+            $game->team = $this->team;
+            $game->matchType = $this->matchType;
 
-            $logustic->cost = $this->cost;
-            $logustic->type = $this->type;
-            $logustic->order_date = $this->order_date;
-            $logustic->order_month = $this->order_month;
-            $logustic->note = $this->note;
-            $logustic->team = $this->team;
-            $logustic->matchType = $this->matchType;
 
 
-
-            $logustic->save();
+            $game->save();
             $this->closeModel = true;
 
             // $project_user = new project_user();
@@ -169,13 +172,13 @@ class LogisticReport extends Component
 
             session()->flash('message', 'تمت اضافة العنصر بنجاح');
 
-        } catch (\Throwable $th) {
-            $this->propertyReset();
-                session()->flash('error',  $th);
+        // } catch (\Throwable $th) {
+        //     $this->propertyReset();
+        //         session()->flash('error',  $th);
 
-            // session()->flash('error', 'الرجاء التأكد من البيانات');
+        //     // session()->flash('error', 'الرجاء التأكد من البيانات');
 
-        }
+        // }
         $this->loaded = false;
         $this->selectreport();
 
@@ -186,8 +189,11 @@ class LogisticReport extends Component
 
     public function editreport($id)
     {
-       $logustic = logustic::where('id', $id)->first();
-        if (!$logustic) {
+       $game = game::where('id', $id)->first();
+
+
+       dd($game);
+        if (!$game) {
             return;
         } else {
             $this->validate();
@@ -197,18 +203,25 @@ class LogisticReport extends Component
            
             try {
 
+    $cost = logustic::where('matchType',  $this->matchType)
+        ->where('team',$this->team)
+        ->get();
+
+        $totalCost = $cost->sum('cost');
+
+
+            $game->cost = $totalCost;
+            $game->matchType = $this->matchType;
+            $game->quantity = $this->quantity;
+            $game->order_date = $this->order_date;
+            $game->order_month = $this->order_month;
+            $game->note = $this->note;
+            $game->team = $this->team;
+            $game->matchType = $this->matchType;
 
 
 
-            $logustic->type = $this->type;
-            $logustic->order_date = $this->order_date;
-            $logustic->order_month = $this->order_month;
-            $logustic->note = $this->note;
-            $logustic->team = $this->team;
-            $logustic->matchType = $this->matchType;
-            $logustic->cost = $this->cost;
-
-                $logustic->update();
+                $game->update();
                 $this->closeModel = true;
 
                 //    $tasks->user()->updateExistingPivot($this->user->id);
@@ -241,14 +254,14 @@ class LogisticReport extends Component
 
     public function deletereport($id)
     {
-        $logustic = logustic::where('id', $id)->first();
-        if (!$logustic) {
+        $game = game::where('id', $id)->first();
+        if (!$game) {
             return;
         } else {
             try {
                 $this->User = Auth::user();
 
-                $logustic->delete();
+                $game->delete();
 
                 session()->flash('message', 'تمت حذف العنصر بنجاح');
 
@@ -270,4 +283,3 @@ class LogisticReport extends Component
 
     }
 }
-

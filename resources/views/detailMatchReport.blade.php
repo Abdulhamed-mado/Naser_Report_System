@@ -45,10 +45,16 @@
                                 <span>مدير {{ $faculty->name }}</span>
                             </div> --}}
 
+                            <div class="mb-4">
+                                <div class="bg-gradient-to-b from-green-50 via-teal-50 to-teal-transparent    p-2 ">
+                                    <span class="font-bold">الفئة </span> : {{ $player->name }}<br>
+                                </div>
+                                <span class="font-bold">الشهر</span> : {{ $current_month }}<br>
 
+                            </div>
                             <div class="bg-gradient-to-b from-green-50 via-gray-50 to-gray-50   p-2 rounded-t-md">
                                 <span class="font-bold ">
-                                    الطلبات اللوجستية</span>
+                                    مستوى الاداء و الحضور </span>
                             </div>
                             <div class="mb-8">
 
@@ -59,22 +65,25 @@
                                                 class="px-1 py-2 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
                                                 #
                                             </th>
-
                                             <th
-                                                class="px-1 py-2 text-xs font-medium tracking-wider text-center  text-gray-500 uppercase">
+                                                class="px-1 py-2 text-xs font-medium tracking-wider  text-gray-500 uppercase text-right">
+                                                نوع المباراة
+                                            </th>
+                                            <th
+                                                class="px-1 py-2 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
                                                 التقارير شهر
                                             </th>
                                             <th
-                                                class="px-1 py-2 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
-                                                النوع
+                                                class="px-1 py-2 text-xs font-medium tracking-wider  text-center text-gray-500 uppercase">
+                                                الكمية
                                             </th>
                                             <th
-                                                class="px-1 py-2 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
-                                                للفئة
+                                                class="px-1 py-2 text-xs font-medium tracking-wider  text-center text-gray-500 uppercase">
+                                                القيمة الاجمالية
                                             </th>
                                             <th
-                                                class="px-1 py-2 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
-                                                note
+                                                class="px-1 py-2 text-xs font-medium tracking-wider  text-center text-gray-500 uppercase">
+                                                ملاحظات
                                             </th>
 
                                         </tr>
@@ -92,22 +101,45 @@
                                                     class="px-2 py-2 text-sm font-medium text-gray-900 whitespace-nowrap text-center">
                                                     {{ $i + 1 }}
                                                 </td>
+                                                <td class="px-2 py-2 text-xs text-gray-900   text-right h-auto">
+                                                    {{ $logustics->type }}
+                                                </td>
+                                                <td
+                                                    class="px-2 py-2 text-xs text-gray-900 whitespace-nowrap text-center">
+                                                    {{ $logustics->matchType }}
+                                                </td>
+
+                                                @if ($logustics->matchType == 'ودية')
+                                                    <td
+                                                        class="px-2 py-2 text-xs text-gray-900 whitespace-nowrap text-center">
+                                                        {{ $secondNumInstances }}
+                                                    </td>
+                                                @endif
+
+                                                @if ($logustics->matchType == 'رسمية')
+                                                    <td
+                                                        class="px-2 py-2 text-xs text-gray-900 whitespace-nowrap text-center">
+                                                        {{ $numInstances }}
+                                                    </td>
+                                                @endif
+
+                                                @if ($logustics->matchType == 'ودية')
+                                                    <td
+                                                        class="px-2 py-2 text-xs text-gray-900 whitespace-nowrap text-center">
+                                                        {{ $logustics->cost * $secondNumInstances }}
+                                                    </td>
+                                                @endif
+
+                                                @if ($logustics->matchType == 'رسمية')
+                                                    <td
+                                                        class="px-2 py-2 text-xs text-gray-900 whitespace-nowrap text-center">
+                                                        {{ $logustics->cost * $numInstances }}
+                                                    </td>
+                                                @endif
 
                                                 <td
-                                                    class="px-2 py-2 text-xs text-gray-900 whitespace-nowrap text-center">
-                                                    {{ $logustic->order_month }}
-                                                </td>
-                                                <td
-                                                    class="px-2 py-2 text-xs text-gray-900 whitespace-nowrap text-center">
-                                                    {{ $logustic->type }}
-                                                </td>
-                                                <td
                                                     class="px-2 py-2 text-sm text-gray-900 whitespace-nowrap text-center">
-                                                    {{ $logustic->team }}
-                                                </td>
-                                                <td
-                                                    class="px-2 py-2 text-sm text-gray-900 whitespace-nowrap text-center">
-                                                    {{ $logustic->note }}
+                                                    {{ $logustics->note }}
                                                 </td>
 
                                             </tr>

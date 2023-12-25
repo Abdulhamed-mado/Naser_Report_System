@@ -25,7 +25,7 @@
 
         <div class="ml-2">
 
-            {{-- <input type="text" wire:model.lazy="search" placeholder="Search for logustic" class="ml-2 border border-opacity-50 border-width-2 rounded-md p-2 "> --}}
+            {{-- <input type="text" wire:model.lazy="search" placeholder="Search for game" class="ml-2 border border-opacity-50 border-width-2 rounded-md p-2 "> --}}
 
 
 
@@ -39,7 +39,7 @@
                 wire:click="lodemodel">
                 اضافة
             </button>
-            {{-- @can('fullAccessUser')
+            @can('fullAccessUser')
                 <button
                     class="bg-black text-white ml-2 px-4 py-2 text-sm rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-opacity-50"
                     x-on:click="showReportModal = true" x-transition:enter="transition ease-out duration-300 transform"
@@ -50,7 +50,7 @@
                     انشاء تقرير
                 </button>
             @endcan
- --}}
+
 
 
             @if ($loaded)
@@ -87,49 +87,6 @@
 
                                         <div class="mt-2 text-right">
                                             <form>
-
-
-                                                <div class="mb-4">
-                                                    <label class="block text-gray-700 font-bold mb-2" for="type">
-                                                        النوع الصنف </label>
-                                                    <select wire:model="type" id="type" name="type"
-                                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                                        dir="rtl">
-                                                        <option value="">اختر النوع </option>
-
-                                                        <option value="ايجار ملاعب">ايجار ملاعب </option>
-                                                        <option value="غسيل">غسيل</option>
-                                                        <option value="مواصلات">مواصلات</option>
-                                                        <option value="وجبات و مياه">وجبات و مياه</option>
-                                                        <option value="مرافق طبي">مرافق طبي</option>
-                                                        <option value="اصابات">اصابات</option>
-                                                        <option value="استشفاء">استشفاء</option>
-
-
-                                                    </select>
-                                                    @error('type')
-                                                        <span class="text-red-500">{{ 'الرجاء التأكد من الصفة' }}</span>
-                                                    @enderror
-
-                                                </div>
-
-
-                                                <div class="mb-4">
-                                                    <label class="block text-gray-700 font-bold mb-2" for="cost">
-                                                        القيمة الصنف
-                                                    </label>
-                                                    <input
-                                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                                        id="cost" type="cost" placeholder="القيمة الصنف"
-                                                        wire:model="cost">
-                                                    @error('cost')
-                                                        <span class="text-red-500">{{ 'الرجاء التأكد من اســــم' }}</span>
-                                                    @enderror
-
-                                                </div>
-
-
-
                                                 <div class="mb-4">
                                                     <label class="block text-gray-700 font-bold mb-2" for="team">
                                                         للفئة
@@ -171,6 +128,26 @@
 
                                                 </div>
 
+
+
+
+                                                <div class="mb-4 text-right">
+                                                    <label class="block text-gray-700 font-bold mb-2" for="quantity">
+                                                        عدد المباريات
+                                                    </label>
+                                                    <input
+                                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight text-right focus:outline-none focus:shadow-outline"
+                                                        id="quantity" placeholder="عدد المباريات" type="text"
+                                                        wire:model="quantity">
+                                                    @error('quantity')
+                                                        <span
+                                                            class="text-red-500">{{ 'الرجاء التأكد من ادخال البيانات' }}</span>
+                                                    @enderror
+
+                                                </div>
+
+
+
                                                 <div class="mb-4 text-right">
                                                     <label class="block text-gray-700 font-bold mb-2" for="order_date">
                                                         تاريخ التقرير
@@ -205,19 +182,6 @@
 
                                                 </div>
 
-                                                <div class="mb-4">
-                                                    <label class="block text-gray-700 font-bold mb-2" for="note">
-                                                        ملاحظات
-                                                    </label>
-                                                    <input
-                                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                                        id="note" type="note" placeholder="ملاحظات"
-                                                        wire:model="note">
-                                                    @error('note')
-                                                        <span class="text-red-500">{{ 'الرجاء التأكد من البيانات' }}</span>
-                                                    @enderror
-
-                                                </div>
 
 
 
@@ -249,8 +213,8 @@
             @endif
 
 
-            {{-- @can('fullAccessUser')
-                this the report model
+            @can('fullAccessUser')
+                {{-- this the report model --}}
 
                 @if ($reportloaded)
                     <div class="fixed z-10 inset-0 overflow-y-auto" x-show="showReportModal"
@@ -313,7 +277,7 @@
                                                             <button
                                                                 class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-black text-base font-medium text-white hover:bg-gray-800 focus:outlineLet me continue where I left off:-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 sm:ml-3 sm:w-auto sm:text-sm"
                                                                 x-on:click="closeModel ? showReportModal = false : showReportModal = true">
-                                                                <a href="/logisticreport/{{ $order_month }}" target="_blank"
+                                                                <a href="/matchReport/{{ $order_month }}" target="_blank"
                                                                     rel="noopener noreferrer">
                                                                     انشاء التقرير
 
@@ -338,7 +302,7 @@
 
                     </div>
                 @endif
-            @endcan --}}
+            @endcan
 
 
 
@@ -353,24 +317,25 @@
                                 <thead class="bg-neutral-50">
                                     <tr class="text-neutral-500">
                                         <th class="px-5 py-3 text-xs font-medium text-right ">رقم التعريف</th>
-                                        <th class="px-5 py-3 text-xs font-medium text-right ">النوع الصنف</th>
-                                        <th class="px-5 py-3 text-xs font-medium text-right ">قيمة الصنف</th>
                                         <th class="px-5 py-3 text-xs font-medium text-right ">للفئة</th>
+                                        <th class="px-5 py-3 text-xs font-medium text-right ">النوع المباراة</th>
+                                        <th class="px-5 py-3 text-xs font-medium text-right ">عدد المباريات</th>
                                         <th class="px-5 py-3 text-xs font-medium text-right ">لشهر </th>
 
                                         <th class="px-5 py-3 text-xs font-medium text-right"></th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-neutral-200 text right">
-                                    @foreach ($logustics as $logustic)
+                                    @foreach ($games as $game)
                                         <tr class="text-neutral-800">
                                             <td class="px-5 py-4 text-sm font-medium whitespace-nowrap">
-                                                {{ $logustic->id }}
+                                                {{ $game->id }}
                                             </td>
-                                            <td class="px-5 py-4 text-sm whitespace-nowrap">{{ $logustic->type }}</td>
-                                            <td class="px-5 py-4 text-sm whitespace-nowrap">{{ $logustic->cost }}</td>
-                                            <td class="px-5 py-4 text-sm whitespace-nowrap">{{ $logustic->team }}</td>
-                                            <td class="px-5 py-4 text-sm whitespace-nowrap">{{ $logustic->order_month }}
+                                            <td class="px-5 py-4 text-sm whitespace-nowrap">{{ $game->team }}</td>
+                                            <td class="px-5 py-4 text-sm whitespace-nowrap">{{ $game->matchType }}</td>
+                                            <td class="px-5 py-4 text-sm whitespace-nowrap">{{ $game->quantity }}</td>
+
+                                            <td class="px-5 py-4 text-sm whitespace-nowrap">{{ $game->order_month }}
                                             </td>
 
                                             <td class="px-5 py-4 text-sm font-medium text-right whitespace-nowrap">
@@ -385,14 +350,14 @@
                                                             x-transition:leave="transition ease-in duration-300 transform"
                                                             x-transition:leave-start="opacity-100 scale-100"
                                                             x-transition:leave-end="opacity-0 scale-90"
-                                                            wire:click="lodeEditmodel({{ $logustic->id }})">
+                                                            wire:click="lodeEditmodel({{ $game->id }})">
 
                                                             تعديل
                                                         </button>
                                                     </span>
                                                     <button
                                                         onclick="confirm('هل تريد حذف المستخدم?') || event.stopImmediatePropagation()"
-                                                        wire:click="deletereport({{ $logustic->id }})"
+                                                        wire:click="deletereport({{ $game->id }})"
                                                         class="inline-flex items-center px-2.5 py-1.5 border border-red-500 rounded-md font-semibold text-xs text-red-500 bg-white hover:bg-red-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
                                                         حذف
                                                     </button>
@@ -449,58 +414,6 @@
                                                                         <div class="mb-4">
                                                                             <label
                                                                                 class="block text-gray-700 font-bold mb-2"
-                                                                                for="type">
-                                                                                النوع الصنف </label>
-                                                                            <select wire:model="type" id="type"
-                                                                                name="type"
-                                                                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                                                                dir="rtl">
-                                                                                <option value="">اختر النوع </option>
-
-                                                                                <option value="ايجار ملاعب">ايجار ملاعب
-                                                                                </option>
-                                                                                <option value="غسيل">غسيل</option>
-                                                                                <option value="مواصلات">مواصلات</option>
-                                                                                <option value="وجبات و مياه">وجبات و مياه
-                                                                                </option>
-                                                                                <option value="مرافق طبي">مرافق طبي
-                                                                                </option>
-                                                                                <option value="اصابات">اصابات</option>
-                                                                                <option value="استشفاء">استشفاء</option>
-
-
-                                                                            </select>
-                                                                            @error('type')
-                                                                                <span
-                                                                                    class="text-red-500">{{ 'الرجاء التأكد من الصفة' }}</span>
-                                                                            @enderror
-
-                                                                        </div>
-
-
-                                                                        <div class="mb-4">
-                                                                            <label
-                                                                                class="block text-gray-700 font-bold mb-2"
-                                                                                for="cost">
-                                                                                القيمة الصنف
-                                                                            </label>
-                                                                            <input
-                                                                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                                                                id="cost" type="cost"
-                                                                                placeholder=" القيمةالصنف"
-                                                                                wire:model="cost">
-                                                                            @error('cost')
-                                                                                <span
-                                                                                    class="text-red-500">{{ 'الرجاء التأكد من اســــم' }}</span>
-                                                                            @enderror
-
-                                                                        </div>
-
-
-
-                                                                        <div class="mb-4">
-                                                                            <label
-                                                                                class="block text-gray-700 font-bold mb-2"
                                                                                 for="team">
                                                                                 للفئة
                                                                             </label>
@@ -548,6 +461,28 @@
 
                                                                         </div>
 
+
+
+
+                                                                        <div class="mb-4 text-right">
+                                                                            <label
+                                                                                class="block text-gray-700 font-bold mb-2"
+                                                                                for="quantity">
+                                                                                عدد المباريات
+                                                                            </label>
+                                                                            <input
+                                                                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight text-right focus:outline-none focus:shadow-outline"
+                                                                                id="quantity" placeholder="عدد المباريات"
+                                                                                type="text" wire:model="quantity">
+                                                                            @error('quantity')
+                                                                                <span
+                                                                                    class="text-red-500">{{ 'الرجاء التأكد من ادخال البيانات' }}</span>
+                                                                            @enderror
+
+                                                                        </div>
+
+
+
                                                                         <div class="mb-4 text-right">
                                                                             <label
                                                                                 class="block text-gray-700 font-bold mb-2"
@@ -589,22 +524,6 @@
 
                                                                         </div>
 
-                                                                        <div class="mb-4">
-                                                                            <label
-                                                                                class="block text-gray-700 font-bold mb-2"
-                                                                                for="note">
-                                                                                ملاحظات
-                                                                            </label>
-                                                                            <input
-                                                                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                                                                id="note" type="note"
-                                                                                placeholder="ملاحضظات" wire:model="note">
-                                                                            @error('note')
-                                                                                <span
-                                                                                    class="text-red-500">{{ 'الرجاء التأكد من اســــم' }}</span>
-                                                                            @enderror
-
-                                                                        </div>
 
 
 
