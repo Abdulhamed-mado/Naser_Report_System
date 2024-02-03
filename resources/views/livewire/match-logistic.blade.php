@@ -51,6 +51,18 @@
                 </button>
             @endcan
 
+            @can('fullAccessUser')
+                <button
+                    class="bg-black text-white ml-2 px-4 py-2 text-sm rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-opacity-50"
+                    x-on:click="showReportModal = true" x-transition:enter="transition ease-out duration-300 transform"
+                    x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+                    x-transition:leave="transition ease-in duration-300 transform"
+                    x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
+                    wire:click="lodedetailreportmodel">
+                    انشاء تقرير مفصل
+                </button>
+            @endcan
+
 
 
             @if ($loaded)
@@ -305,6 +317,118 @@
             @endcan
 
 
+            @can('fullAccessUser')
+                {{-- this the report model --}}
+
+                @if ($reportdetailloaded)
+                    <div class="fixed z-10 inset-0 overflow-y-auto" x-show="showReportModal"
+                        x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+                        x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-300"
+                        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+
+                        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                            <div class="fixed inset-0 transition-opacity" aria-hidden="true" x-show="showReportModal"
+                                x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+                                x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-300"
+                                x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+                                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+                            </div>
+
+                            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+                            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                                x-show="showReportModal" x-transition:enter="transition ease-out duration-300"
+                                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                                x-transition:leave="transition ease-in duration-300"
+                                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
+                                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                    <div class="sm:flex sm:items-start">
+                                        <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
+                                            <h3 class="text-lg leading-6 font-medium text-gray-900 text-right">
+                                                انشاء التقرير
+                                            </h3>
+
+                                            <div class="mt-2 text-right">
+                                                <form>
+
+                                                    <div class="mb-4">
+                                                        <label class="block text-gray-700 font-bold mb-2" for="team">
+                                                            للفئة
+                                                        </label>
+                                                        <select wire:model="team" id="team" name="team"
+                                                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                            dir="rtl">
+                                                            <option value="">اختر الفئة </option>
+
+                                                            <option value="ناشئين">ناشئين</option>
+                                                            <option value="براعم">براعم</option>
+                                                            <option value="امال">امال</option>
+                                                            <option value="اواسط">اواسط</option>
+
+
+                                                        </select>
+                                                        @error('team')
+                                                            <span class="text-red-500">{{ 'الرجاء التأكد من الفئة' }}</span>
+                                                        @enderror
+
+                                                    </div>
+
+                                                    <div class="mt-2 text-right">
+                                                        <div class="mb-4 text-right">
+                                                            <label class="block text-gray-700 font-bold mb-2"
+                                                                for="order_month">
+                                                                تقارير شهر
+
+                                                            </label>
+                                                            <select wire:model="order_month" id="order_month"
+                                                                name="order_month"
+                                                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                                                <option value="1">اختر الشهر </option>
+                                                                @for ($i = 1; $i <= 12; $i++)
+                                                                    <option value="{{ $i }}">{{ $i }}
+                                                                    </option>
+                                                                @endfor
+                                                            </select>
+                                                            @error('order_month')
+                                                                <span
+                                                                    class="text-red-500">{{ 'الرجاء التأكد من ادخال البيانات' }}</span>
+                                                            @enderror
+
+                                                        </div>
+
+
+                                                        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                                                            <button
+                                                                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-black text-base font-medium text-white hover:bg-gray-800 focus:outlineLet me continue where I left off:-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 sm:ml-3 sm:w-auto sm:text-sm"
+                                                                x-on:click="closeModel ? showReportModal = false : showReportModal = true">
+                                                                <a href="/detailmatchReport/{{ $team }}/{{ $order_month }}"
+                                                                    target="_blank" rel="noopener noreferrer">
+                                                                    انشاء التقرير
+
+                                                                </a>
+                                                            </button>
+
+
+                                                            <button
+                                                                class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                                                                x-on:click="showReportModal = false">
+                                                                رجوع
+                                                            </button>
+                                                        </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                @endif
+            @endcan
 
 
         </div>

@@ -47,7 +47,7 @@
 
                             <div class="mb-4">
                                 <div class="bg-gradient-to-b from-green-50 via-teal-50 to-teal-transparent    p-2 ">
-                                    <span class="font-bold">الفئة </span> : {{ $player->name }}<br>
+                                    <span class="font-bold">الفئة </span> : {{ $team }}<br>
                                 </div>
                                 <span class="font-bold">الشهر</span> : {{ $current_month }}<br>
 
@@ -102,44 +102,45 @@
                                                     {{ $i + 1 }}
                                                 </td>
                                                 <td class="px-2 py-2 text-xs text-gray-900   text-right h-auto">
-                                                    {{ $logustics->type }}
+                                                    {{ $logustic->type }}
                                                 </td>
                                                 <td
                                                     class="px-2 py-2 text-xs text-gray-900 whitespace-nowrap text-center">
-                                                    {{ $logustics->matchType }}
+                                                    {{ $logustic->matchType }}
                                                 </td>
 
-                                                @if ($logustics->matchType == 'ودية')
+                                                @if ($logustic->matchType == 'ودية')
                                                     <td
                                                         class="px-2 py-2 text-xs text-gray-900 whitespace-nowrap text-center">
                                                         {{ $secondNumInstances }}
                                                     </td>
                                                 @endif
 
-                                                @if ($logustics->matchType == 'رسمية')
+                                                @if ($logustic->matchType == 'رسمية')
                                                     <td
                                                         class="px-2 py-2 text-xs text-gray-900 whitespace-nowrap text-center">
                                                         {{ $numInstances }}
+
                                                     </td>
                                                 @endif
 
-                                                @if ($logustics->matchType == 'ودية')
+                                                @if ($logustic->matchType == 'ودية')
                                                     <td
                                                         class="px-2 py-2 text-xs text-gray-900 whitespace-nowrap text-center">
-                                                        {{ $logustics->cost * $secondNumInstances }}
+                                                        {{ $logustic->cost * $secondNumInstances }}
                                                     </td>
                                                 @endif
 
-                                                @if ($logustics->matchType == 'رسمية')
+                                                @if ($logustic->matchType == 'رسمية')
                                                     <td
                                                         class="px-2 py-2 text-xs text-gray-900 whitespace-nowrap text-center">
-                                                        {{ $logustics->cost * $numInstances }}
+                                                        {{ $logustic->cost * $numInstances }}
                                                     </td>
                                                 @endif
 
                                                 <td
                                                     class="px-2 py-2 text-sm text-gray-900 whitespace-nowrap text-center">
-                                                    {{ $logustics->note }}
+                                                    {{ $logustic->note }}
                                                 </td>
 
                                             </tr>

@@ -182,15 +182,71 @@ class LogisticReport extends Component
 
     }
 
+    public function addAnotherReport()
+    {
+
+        // dd($this->preformances);
+        // $this->report_month = Carbon::now()->toDateString();
+
+        // $this->validate();
+        //  $year = Carbon::now()->year;
+
+
+        // $date = Carbon::createFromFormat('mm/dd/yyyy', $this->report_date)->format('Y-m-d');
+        // dd($date);
+
+        try {
+
+
+
+            // dd($this->task_month);
+            $logustic = new logustic();
+
+            $logustic->cost = $this->cost;
+            $logustic->type = $this->type;
+            $logustic->order_date = $this->order_date;
+            $logustic->order_month = $this->order_month;
+            $logustic->note = $this->note;
+            $logustic->team = $this->team;
+            $logustic->matchType = $this->matchType;
+
+
+
+            $logustic->save();
+            $this->closeModel = true;
+
+            // $project_user = new project_user();
+            // $project_user->project_id = $projects->id;
+            // $project_user->user_id = $this->userId;
+
+ 
+            // $project_user->save();
+
+            session()->flash('message', 'تمت اضافة العنصر بنجاح');
+        $this->reset( 'type', 'cost');
+
+        } catch (\Throwable $th) {
+            $this->propertyReset();
+                session()->flash('error',  $th);
+
+            // session()->flash('error', 'الرجاء التأكد من البيانات');
+        $this->loaded = false;
+
+        }
+        $this->selectreport();
+
+
+    }
+
 
 
     public function editreport($id)
     {
-       $logustic = logustic::where('id', $id)->first();
+       $logustic = logustic::find($id);
         if (!$logustic) {
             return;
         } else {
-            $this->validate();
+            // $this->validate();
 
 
 

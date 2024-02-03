@@ -69,7 +69,7 @@ class matchReport extends Controller
     }
   
   
-   public function detaiReport($month,$team)
+   public function detaiReport($team,$month)
     {
         $this->order_month = $month;
 
@@ -87,18 +87,18 @@ class matchReport extends Controller
            
 
             
-              $firstgame = game::where('order_month', $this->order_month)->where('team', 'ناشئين')->where('matchType', 'رسمية')
+              $firstgame = game::where('order_month', $this->order_month)->where('team', $team)->where('matchType', 'رسمية')
             ->groupBy('id')
             ->get();
 
-            $numInstances = $firstgame->count();
+            $numInstances = $firstgame->sum('quantity');
+// dd($numInstances);
 
-
-                 $secondgame = game::where('order_month', $this->order_month)->where('team', 'ناشئين')->where('matchType', 'ودية')
+                 $secondgame = game::where('order_month', $this->order_month)->where('team', $team)->where('matchType', 'ودية')
             ->groupBy('id')
             ->get();
 
-            $secondNumInstances = $secondgame->count();
+            $secondNumInstances = $secondgame->sum('quantity');
         // dd($this->report_month);
 
 

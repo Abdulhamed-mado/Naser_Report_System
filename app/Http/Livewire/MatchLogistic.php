@@ -26,6 +26,7 @@ class MatchLogistic extends Component
     public $loaded = false;
     public $Editloaded = false;
     public $reportloaded = false;
+    public $reportdetailloaded = false;
 
     public $closeModel = false;
     public string $edit_id = '';
@@ -116,6 +117,12 @@ class MatchLogistic extends Component
         $this->closeModel = false;
 
     }
+    public function lodedetailreportmodel()
+    {
+        $this->reportdetailloaded = true;
+        $this->closeModel = false;
+
+    }
 
     public function propertyReset()
     {
@@ -142,10 +149,14 @@ class MatchLogistic extends Component
 
         $cost = logustic::where('matchType',  $this->matchType)
         ->where('team',$this->team)
+        ->where('order_month',$this->order_month)
         ->get();
 
-        $totalCost = $cost->sum('cost');
-
+// dd($cost);
+// $costg=$cost->cost;
+        $totalCost = $cost->sum('cost')*$this->quantity;
+// dd($totalCost);
+        
             // dd($this->task_month);
             $game = new game();
             $game->cost = $totalCost;
@@ -189,19 +200,13 @@ class MatchLogistic extends Component
 
     public function editreport($id)
     {
-       $game = game::where('id', $id)->first();
+        $game=game::find($id);
 
+        if(!$game){
+                            session()->flash('error', 'الرجاء التأكد من البيانات');
 
-       dd($game);
-        if (!$game) {
-            return;
-        } else {
-            $this->validate();
-
-
-
-           
-            try {
+        }else{
+       try {
 
     $cost = logustic::where('matchType',  $this->matchType)
         ->where('team',$this->team)
@@ -243,12 +248,7 @@ class MatchLogistic extends Component
             $this->Editloaded = false;
             $this->selectreport();
 
-
-
-        }
-
-
-
+}
 
     }
 

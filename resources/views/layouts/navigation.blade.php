@@ -58,7 +58,7 @@
 
                     @can('fullAccessUser')
                         <x-nav-link :href="route('MatchLogistic')" :active="request()->routeIs('MatchLogistic')">
-                            <img class="w-6 h-6 ml-2" src="{{ asset('images/openBook.svg') }}" alt="ادارة اللوجستيات">
+                            <img class="w-6 h-6 ml-2" src="{{ asset('images/closed-book.svg') }}" alt="ادارة اللوجستيات">
                             {{ __('مخطط المصروفات الشهرية') }}
                         </x-nav-link>
                     @endcan
